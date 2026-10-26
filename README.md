@@ -8,7 +8,7 @@ This is a static PWA (HTML, CSS, ES modules). No build step. Paths are relative 
 
 ## How to play
 
-1. Start a **shift** (about two minutes). Tickets stack at the top. Each one has a recipe hint and a patience bar.
+1. Start a **shift** (five minutes). Tickets stack at the top. Each one has a recipe hint and a patience bar. Spawn rate and patience ramp across the whole shift, so the first minutes stay manageable.
 2. Tap a ticket to make that drink. Tap bottles, mixers, then garnishes. Order does not matter.
 3. Recipe icons check off as you add them. A wrong ingredient **spoils** the glass — hit **Trash** and start over.
 4. **Serve** when the glass matches. Faster serves pay a bigger tip. Serving quickly in a row builds a **combo** multiplier.

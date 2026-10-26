@@ -10,7 +10,7 @@ import {
 } from './data.js?v=DEV';
 import { haptic } from './haptics.js?v=DEV';
 
-const SHIFT_MS = 120_000;
+const SHIFT_MS = 300_000;
 const MAX_TICKETS = 4;
 const COMBO_WINDOW = 4500;
 const HOLD_KEY = 'tap-pop-highscore';
@@ -270,10 +270,12 @@ export class Game {
   };
 
   difficulty() {
+    // t is 0 at the start of a 5-minute shift and 1 at the end.
+    // Keep the opening calm; only reach v1's late-shift pressure in the last minute.
     const t = 1 - this.timeLeft / SHIFT_MS;
     return {
-      spawn: 7800 - t * 3200,
-      patience: 26000 - t * 8000,
+      spawn: 9000 - t * 4200,
+      patience: 30000 - t * 10000,
     };
   }
 
