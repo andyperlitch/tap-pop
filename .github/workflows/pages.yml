@@ -1,0 +1,60 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stamp release version
+        run: |
+          set -euo pipefail
+          V="${GITHUB_SHA::7}-$(date -u +%s)"
+          printf '{"version":"%s"}\n' "$V" > version.json
+          python3 - << PY
+          from pathlib import Path
+          v = "${V}"
+          for path in Path('.').rglob('*'):
+              if path.suffix not in {'.html', '.js', '.css'}:
+                  continue
+              if any(p in path.parts for p in ('.git', '.github', '_site')):
+                  continue
+              text = path.read_text()
+              updated = text.replace('v=DEV', f'v={v}')
+              updated = updated.replace('content="DEV"', f'content="{v}"')
+              updated = updated.replace("CACHE_VERSION = 'DEV'", f"CACHE_VERSION = '{v}'")
+              if updated != text:
+                  path.write_text(updated)
+          print("stamped", v)
+          PY
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

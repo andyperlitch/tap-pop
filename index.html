@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1a0a2e">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tap Pop">
+  <meta name="app-version" content="DEV">
+  <title>Tap Pop</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./css/styles.css?v=DEV">
+</head>
+<body>
+  <div id="app">
+    <header class="hud">
+      <div class="hud-left">
+        <span class="lives" data-lives></span>
+        <span class="clock" data-time>2:00</span>
+      </div>
+      <div class="hud-score">
+        <span class="label">SCORE</span>
+        <strong data-score>0</strong>
+      </div>
+      <div class="hud-right">
+        <span class="combo" data-combo>COMBO x1</span>
+        <button type="button" class="icon-btn" data-pause-btn aria-label="Pause">II</button>
+      </div>
+    </header>
+
+    <section class="tickets" data-tickets aria-label="Orders"></section>
+
+    <section class="backbar" data-backbar aria-label="Spirits"></section>
+    <section class="mixers" data-mixers aria-label="Mixers"></section>
+
+    <section class="workspace">
+      <div class="floaters" data-floaters></div>
+      <button type="button" class="glass" data-glass data-glass-shape="highball" aria-label="Active drink">
+        <span class="glass-shine"></span>
+        <span class="fill" data-fill></span>
+        <span class="glass-garnish" data-glass-garnish></span>
+      </button>
+      <div class="serve-wrap">
+        <div class="batch-bar" data-batch-bar hidden>BATCH 2/2</div>
+        <button type="button" class="serve" data-serve disabled>
+          <span data-serve-label>SERVE</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="garnishes" data-garnishes aria-label="Garnishes"></section>
+
+    <nav class="dock">
+      <button type="button" class="dock-btn" data-special>
+        <span class="dock-ico star">★</span>
+        Special
+      </button>
+      <button type="button" class="dock-btn" data-batch>
+        <span class="dock-ico shaker"></span>
+        Batch
+      </button>
+      <button type="button" class="dock-btn" data-hold>
+        <span class="dock-ico hold-dot"></span>
+        Hold
+      </button>
+      <button type="button" class="dock-btn danger" data-trash>
+        <span class="dock-ico trash"></span>
+        Trash
+      </button>
+    </nav>
+
+    <div class="overlay" data-start>
+      <div class="panel">
+        <p class="kicker">Neon lounge</p>
+        <h1>TAP POP</h1>
+        <p class="lede">Overcooked, but a bartender. Tickets stack, patience ticks down, and matching orders can be batched.</p>
+        <ol class="how">
+          <li>Tap a ticket, then tap spirits, mixers, and garnishes.</li>
+          <li>Wrong ingredient spoils the glass — trash it.</li>
+          <li>Serve fast to build combo. Batch when you see xN BATCH.</li>
+        </ol>
+        <p class="high-line">High score <strong data-high>0</strong></p>
+        <button type="button" class="cta" data-play>Start shift</button>
+        <button type="button" class="ghost" data-mute>Sound on</button>
+      </div>
+    </div>
+
+    <div class="overlay" data-pause hidden>
+      <div class="panel">
+        <h2>Paused</h2>
+        <button type="button" class="cta" data-resume>Resume</button>
+        <button type="button" class="ghost" data-mute>Sound on</button>
+        <button type="button" class="ghost" data-quit>End shift</button>
+      </div>
+    </div>
+
+    <div class="overlay" data-end hidden>
+      <div class="panel">
+        <h2 data-end-title>Shift complete</h2>
+        <p class="end-score" data-end-score>0</p>
+        <p class="end-meta">Drinks <strong data-end-drinks>0</strong> · Best combo <strong data-end-combo>x1</strong></p>
+        <p class="high-line" data-end-high>Best 0</p>
+        <button type="button" class="cta" data-again>Another shift</button>
+        <button type="button" class="ghost" data-menu>Menu</button>
+      </div>
+    </div>
+
+    <div id="update-toast" class="toast" hidden role="status">
+      <p>New version available. Refresh</p>
+      <button type="button" class="toast-refresh" data-update-refresh>Refresh</button>
+      <button type="button" class="toast-x" data-update-dismiss aria-label="Dismiss">×</button>
+    </div>
+  </div>
+  <script type="module" src="./js/main.js?v=DEV"></script>
+</body>
+</html>
